@@ -1,0 +1,25 @@
+import torch
+
+bn = torch.nn.BatchNorm1d(num_features=5, affine=False)
+print("初始状态")
+print("BatchNorm1d 的 gamma 为{}".format(bn.weight))
+print("BatchNorm1d 的 beta 为{}".format(bn.bias))
+print("BatchNorm1d 的 epsilon 为{}".format(bn.eps))
+print("BatchNorm1d 的 momentum 为{}".format(bn.momentum))
+print("BatchNorm1d 的 running_mean 为{}".format(bn.running_mean))
+print("BatchNorm1d 的 running_var  为{}".format(bn.running_var))
+data = torch.rand(2, 5)
+print("初始输入数据\n{}".format(data))
+bn.train()
+data_bn = bn(data)
+print("==========================================================")
+print("批标准化后")
+print("批标准后数据\n{}".format(data_bn))
+print("BatchNorm1d 的 gamma  gamma 为{}".format(bn.weight))
+print("BatchNorm1d 的 beta 为{}".format(bn.bias))
+print("BatchNorm1d 的 epsilon 为{}".format(bn.eps))
+print("BatchNorm1d 的 momentum 为{}".format(bn.momentum))
+print("BatchNorm1d 的 running_mean 为{}".format(bn.running_mean))
+print("BatchNorm1d 的 running_var  为{}".format(bn.running_var))
+
+
