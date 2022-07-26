@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import integrate
 from matplotlib import pyplot as plt
 
 # case1:
@@ -32,24 +33,28 @@ from matplotlib import pyplot as plt
 
 # case2:
 # f(x) = \begin{cases}
-# 0 \quad x<0 \\
-# 1 \quad x \ge0
-# \end{cases}
+# \quad 0    &\quad x<0 \\
+# \quad e^{-t} &\quad x \ge 0\end{cases}
+# 单边衰减指数函数
 
-x = np.linspace(-5, 5, 500)
-w = np.linspace(0.1, 500, 500)  # 防止分母为0
-y = [1 if _ > -2 else 0 for _ in x]
-fw = np.abs(1 / w * (np.sin(5*w)+np.sin(2*w))+1j*1/w*(np.cos(5*w)-np.cos(2*w)))
+x = np.linspace(-5, 5, 1000)
+fx = np.array([np.exp(-i) if i > 0 else 0 for i in x])
 # plt.grid()
-# plt.plot(x, y)
-plt.show()
-plt.xlim(0, 100)
-plt.ylim(0, 5)
-plt.plot(w, np.sin(fw))
-plt.show()
-
-# fw_2 = np.fft.fft(y)
-# plt.xlim(0, 100)
-# plt.ylim(0, 5)
-# plt.plot(w, np.abs(fw_2))
+# plt.plot(x, fx)
 # plt.show()
+
+w = np.linspace(-10, 10, 1000)
+fw = -1 / (1j * w + 1) * (np.exp(-(1j * w + 1) * 5) - 1)
+
+# plt.grid()
+# plt.plot(w, np.abs(fw))
+# plt.show()
+
+ft = np.fft.fft(fx)
+ft_1 = ft[ft >= 0]
+fe = np.fft.fftfreq(x.size, x[1] - x[0])
+fe_1 = fe[ft >= 0]
+A = 2/len(x) * np.abs(ft_1)
+plt.xlim(-10, 10)
+plt.plot(fe_1, A)
+plt.show()
