@@ -12,8 +12,8 @@ ft = np.sin(3 * w * t)
 # plt.plot(t, ft)
 # plt.show()
 
-fw = np.abs(np.fft.fft(ft, norm="forward"))
-fe = np.fft.fftfreq(int(0.02 / T_s), t[1] - t[0])
+fw = np.abs(np.fft.fft(ft, n=(np.ceil(np.log2(np.abs(int(T / T_s)))).astype("int"))**2, norm="forward"))
+fe = np.fft.fftfreq(fw.size, t[1] - t[0])
 
 fw_positive = fw[fe >= 0]
 fw_positive[0] /= 2

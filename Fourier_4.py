@@ -17,7 +17,7 @@ fw_original = np.fft.fft(ft)  # 原始的快速傅里叶变换数据
 
 fw = np.abs(np.fft.fft(ft, norm="forward"))
 
-fe = np.fft.fftfreq(N, sample_t)  # 计算频域分量
+fe = np.fft.fftfreq(fw.size, sample_t)  # 计算频域分量
 
 fw_positive = fw[fe >= 0] * 2
 fw_positive[0] /= 2
