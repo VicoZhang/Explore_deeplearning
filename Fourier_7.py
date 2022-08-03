@@ -7,7 +7,7 @@ N = 2000  # 共采样1024个点
 sample_freq = 100  # 采样频率[Hz]
 sample_t = 1 / sample_freq  # 采样间隔[s]
 signal_len = N * sample_t  # 信号长度[s]
-t = np.arange(0, signal_len, sample_t)  # 信号时域序列[s]
+t = np.linspace(0, signal_len, N)  # 信号时域序列[s]
 
 ft = np.zeros_like(t)
 ft[:500] = 10 * np.cos(2 * np.pi * 10 * t[:500])
